@@ -9,11 +9,13 @@ namespace Workout.API.DI
     {
         public static IServiceCollection AddInMemoryDatabase(this IServiceCollection services)
         {
-            services.AddDbContext<UnitOfWork>(options =>
+            services.AddDbContext<WorkoutContext>(options =>
             {
                 options.UseInMemoryDatabase("workoutdb")
                 .ConfigureWarnings(builder => builder.Ignore(InMemoryEventId.TransactionIgnoredWarning));
             });
+
+            services.AddScoped<IUnitOfWork, WorkoutContext>();
 
             return services;
         }
@@ -22,7 +24,7 @@ namespace Workout.API.DI
         {
             using var scope = app.Services.CreateScope();
 
-            var unitOfWork = scope.ServiceProvider.GetRequiredService<UnitOfWork>();
+            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
 
             unitOfWork.Exercises.Add(new(1, "Squats", "Squats for pump the whole body"));
             unitOfWork.Exercises.Add(new(3, "Burpees", "Burpees to burn all undesired fat"));
@@ -31,7 +33,7 @@ namespace Workout.API.DI
             unitOfWork.Series.Add(new(1, 1, 10, 0f));
             unitOfWork.Series.Add(new(2, 3, 10, 20.5f));
 
-            unitOfWork.SaveChanges();
+            unitOfWork.SaveChangesAsync().GetAwaiter().GetResult();
         }
     }
 }

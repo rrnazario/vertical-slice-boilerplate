@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Workout.API.SeedWork;
+using Workout.Domain.SeedWork;
 using Workout.Infra.Persistence;
 
 namespace Workout.API.Features.Serie
@@ -23,12 +24,12 @@ namespace Workout.API.Features.Serie
         public class QueryHandler
             : RequestHandlerBase, IRequestHandler<GetAllSeriesQuery, IEnumerable<GetAllSeriesQueryResponse>>
         {
-            public QueryHandler(UnitOfWork workoutContext)
-                : base(workoutContext) { }
+            public QueryHandler(IUnitOfWork unitOfWork)
+                : base(unitOfWork) { }
 
             public async Task<IEnumerable<GetAllSeriesQueryResponse>> Handle(GetAllSeriesQuery request, CancellationToken cancellationToken)
             {
-                var result = await _workoutContext
+                var result = await _unitOfWork
                     .Series
                     .Include(_ => _.Exercise)
                     .Select(s => new GetAllSeriesQueryResponse(

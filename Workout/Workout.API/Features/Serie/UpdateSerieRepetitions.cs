@@ -1,6 +1,7 @@
 ﻿using Light.GuardClauses;
 using MediatR;
 using Workout.API.SeedWork;
+using Workout.Domain.SeedWork;
 using Workout.Infra.Persistence;
 
 namespace Workout.API.Features.Serie
@@ -16,18 +17,18 @@ namespace Workout.API.Features.Serie
             : RequestHandlerBase, IRequestHandler<UpdateRepetitionsCommand>
 
         {
-            public UpdateRepetitionsCommandHandler(UnitOfWork workoutContext)
+            public UpdateRepetitionsCommandHandler(IUnitOfWork workoutContext)
                 : base(workoutContext) { }
 
             public async Task<Unit> Handle(UpdateRepetitionsCommand request, CancellationToken cancellationToken)
             {
-                var serie = await _workoutContext.Series.FindAsync(request.Id);
+                var serie = await _unitOfWork.Series.FindAsync(request.Id);
                 serie.MustNotBeNull();
 
                 serie!.UpdateRepetitions(request.Amount);
-                _workoutContext.Update(serie);
+                _unitOfWork.Update(serie);
 
-                await _workoutContext.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
 
                 return Unit.Value;
             }

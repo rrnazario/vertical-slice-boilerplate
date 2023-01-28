@@ -1,15 +1,16 @@
 ﻿using Light.GuardClauses;
+using Workout.Domain.SeedWork;
 using Workout.Infra.Persistence;
 
 namespace Workout.API.SeedWork
 {
     public abstract class RequestHandlerBase
     {
-        protected readonly UnitOfWork _workoutContext;
+        protected readonly IUnitOfWork _unitOfWork;
 
-        protected RequestHandlerBase(UnitOfWork workoutContext)
+        protected RequestHandlerBase(IUnitOfWork workoutContext)
         {
-            _workoutContext = workoutContext.MustNotBeNull();
+            _unitOfWork = workoutContext.MustNotBeNull();
         }
     }
 }

@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Workout.API.SeedWork;
+using Workout.Domain.SeedWork;
 using Workout.Infra.Persistence;
 
 namespace Workout.API.Features.Exercise
@@ -16,8 +17,8 @@ namespace Workout.API.Features.Exercise
         public class CreateExerciseCommandValidator 
             : AbstractValidator<CreateExerciseCommand>
         {
-            protected readonly UnitOfWork _unitOfWork;
-            public CreateExerciseCommandValidator(UnitOfWork unitOfWork)
+            protected readonly IUnitOfWork _unitOfWork;
+            public CreateExerciseCommandValidator(IUnitOfWork unitOfWork)
             {
                 _unitOfWork = unitOfWork;
 
@@ -41,7 +42,7 @@ namespace Workout.API.Features.Exercise
         public class Handler
             : RequestHandlerBase, IRequestHandler<CreateExerciseCommand, int>
         {
-            public Handler(UnitOfWork workoutContext) : base(workoutContext)
+            public Handler(WorkoutContext workoutContext) : base(workoutContext)
             {
             }
 
@@ -49,9 +50,9 @@ namespace Workout.API.Features.Exercise
             {
                 var newExercise = new Domain.Model.Exercise(request.Name, request.Description, string.Empty);
 
-                var result = await _workoutContext.Exercises.AddAsync(newExercise, cancellationToken);
+                var result = await _unitOfWork.Exercises.AddAsync(newExercise, cancellationToken);
 
-                await _workoutContext.SaveChangesAsync(cancellationToken);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 return result.Entity.Id;
             }
