@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Workout/.vs/Workout
+/Workout/Workout.API/bin
+/Workout/Workout.API/obj
+/Workout/Workout.Domain/bin
+/Workout/Workout.Domain/obj
+/Workout/Workout.Infra/bin
+/Workout/Workout.Infra/obj
