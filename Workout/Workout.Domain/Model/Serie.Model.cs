@@ -15,7 +15,6 @@ namespace Workout.Domain.Model
 
         public Serie(int id, int exerciseId, int repetitions, float weight)
         {
-            //Exercise = exercise;
             Id = id;
             ExerciseId = exerciseId;
             Repetitions = repetitions;

@@ -9,7 +9,7 @@ namespace Workout.API.DI
     {
         public static IServiceCollection AddInMemoryDatabase(this IServiceCollection services)
         {
-            services.AddDbContext<WorkoutContext>(options =>
+            services.AddDbContext<UnitOfWork>(options =>
             {
                 options.UseInMemoryDatabase("workoutdb")
                 .ConfigureWarnings(builder => builder.Ignore(InMemoryEventId.TransactionIgnoredWarning));
@@ -22,18 +22,16 @@ namespace Workout.API.DI
         {
             using var scope = app.Services.CreateScope();
 
-            var context = scope.ServiceProvider.GetRequiredService<WorkoutContext>();
+            var unitOfWork = scope.ServiceProvider.GetRequiredService<UnitOfWork>();
 
-            //context.Database.EnsureCreated();
+            unitOfWork.Exercises.Add(new(1, "Squats", "Squats for pump the whole body"));
+            unitOfWork.Exercises.Add(new(3, "Burpees", "Burpees to burn all undesired fat"));
+            unitOfWork.Exercises.Add(new(2, "Dumbbell rows", "Dumbbell rows to stronger backs"));            
 
-            context.Exercises.Add(new(1, "Squats", "Squats for pump the whole body"));
-            context.Exercises.Add(new(3, "Burpees", "Burpees to burn all undesired fat"));
-            context.Exercises.Add(new(2, "Dumbbell rows", "Dumbbell rows to stronger backs"));            
+            unitOfWork.Series.Add(new(1, 1, 10, 0f));
+            unitOfWork.Series.Add(new(2, 3, 10, 20.5f));
 
-            context.Series.Add(new(1, 1, 10, 0f));
-            context.Series.Add(new(2, 3, 10, 20.5f));
-
-            context.SaveChanges();
+            unitOfWork.SaveChanges();
         }
     }
 }

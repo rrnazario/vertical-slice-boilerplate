@@ -16,7 +16,7 @@ namespace Workout.API.Features.Serie
             : RequestHandlerBase, IRequestHandler<UpdateRepetitionsCommand>
 
         {
-            public UpdateRepetitionsCommandHandler(WorkoutContext workoutContext) : base(workoutContext)
+            public UpdateRepetitionsCommandHandler(UnitOfWork workoutContext) : base(workoutContext)
             {
             }
 

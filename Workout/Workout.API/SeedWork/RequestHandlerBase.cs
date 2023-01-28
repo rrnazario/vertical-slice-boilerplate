@@ -5,9 +5,9 @@ namespace Workout.API.SeedWork
 {
     public abstract class RequestHandlerBase
     {
-        protected readonly WorkoutContext _workoutContext;
+        protected readonly UnitOfWork _workoutContext;
 
-        protected RequestHandlerBase(WorkoutContext workoutContext)
+        protected RequestHandlerBase(UnitOfWork workoutContext)
         {
             _workoutContext = workoutContext.MustNotBeNull();
         }

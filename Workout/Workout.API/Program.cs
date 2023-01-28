@@ -1,4 +1,3 @@
-using MediatR;
 using Workout.API.DI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInMemoryDatabase();
-
-builder.Services.AddMediatR(typeof(Program).Assembly);
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 

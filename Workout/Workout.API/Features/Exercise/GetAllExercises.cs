@@ -8,10 +8,7 @@ namespace Workout.API.Features.Exercise
     public class GetAllExercises
     {
         public record GetAllExercisesQuery
-            : IRequest<IEnumerable<GetAllExercisesResponse>>
-        {
-
-        }
+            : IRequest<IEnumerable<GetAllExercisesResponse>>;
 
         public record GetAllExercisesResponse(
             string Name,
@@ -21,7 +18,7 @@ namespace Workout.API.Features.Exercise
         public class QueryHandler
             : RequestHandlerBase, IRequestHandler<GetAllExercisesQuery, IEnumerable<GetAllExercisesResponse>>
         {
-            public QueryHandler(WorkoutContext workoutContext) : base(workoutContext) { }
+            public QueryHandler(UnitOfWork workoutContext) : base(workoutContext) { }
 
             public Task<IEnumerable<GetAllExercisesResponse>> Handle(GetAllExercisesQuery request, CancellationToken cancellationToken)
             {

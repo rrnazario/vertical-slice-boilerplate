@@ -1,6 +1,6 @@
-﻿using Light.GuardClauses;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Workout.API.SeedWork;
 using Workout.Infra.Persistence;
 
 namespace Workout.API.Features.Serie
@@ -21,13 +21,10 @@ namespace Workout.API.Features.Serie
             );
 
         public class QueryHandler
-            : IRequestHandler<GetAllSeriesQuery, IEnumerable<GetAllSeriesQueryResponse>>
+            : RequestHandlerBase, IRequestHandler<GetAllSeriesQuery, IEnumerable<GetAllSeriesQueryResponse>>
         {
-            private readonly WorkoutContext _workoutContext;
-
-            public QueryHandler(WorkoutContext workoutContext)
+            public QueryHandler(UnitOfWork workoutContext) : base(workoutContext)
             {
-                _workoutContext = workoutContext.MustNotBeNull();
             }
 
             public async Task<IEnumerable<GetAllSeriesQueryResponse>> Handle(GetAllSeriesQuery request, CancellationToken cancellationToken)
