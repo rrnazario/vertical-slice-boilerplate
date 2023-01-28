@@ -23,9 +23,8 @@ namespace Workout.API.Features.Serie
         public class QueryHandler
             : RequestHandlerBase, IRequestHandler<GetAllSeriesQuery, IEnumerable<GetAllSeriesQueryResponse>>
         {
-            public QueryHandler(UnitOfWork workoutContext) : base(workoutContext)
-            {
-            }
+            public QueryHandler(UnitOfWork workoutContext)
+                : base(workoutContext) { }
 
             public async Task<IEnumerable<GetAllSeriesQueryResponse>> Handle(GetAllSeriesQuery request, CancellationToken cancellationToken)
             {

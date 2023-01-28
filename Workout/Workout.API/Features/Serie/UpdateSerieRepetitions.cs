@@ -16,9 +16,8 @@ namespace Workout.API.Features.Serie
             : RequestHandlerBase, IRequestHandler<UpdateRepetitionsCommand>
 
         {
-            public UpdateRepetitionsCommandHandler(UnitOfWork workoutContext) : base(workoutContext)
-            {
-            }
+            public UpdateRepetitionsCommandHandler(UnitOfWork workoutContext)
+                : base(workoutContext) { }
 
             public async Task<Unit> Handle(UpdateRepetitionsCommand request, CancellationToken cancellationToken)
             {

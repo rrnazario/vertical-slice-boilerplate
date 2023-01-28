@@ -19,7 +19,7 @@ namespace Workout.Infra.Middlewares
                 await context.Response.WriteAsync(
                     JsonConvert.SerializeObject(new
                     {
-                        error = e.Message
+                        message = e.Message
                     }));
             }
         }
