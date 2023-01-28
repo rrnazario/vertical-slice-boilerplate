@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Workout.Infra.Behaviors;
+using Workout.Infra.Middlewares;
 
 namespace Workout.API.DI
 {
@@ -13,9 +14,21 @@ namespace Workout.API.DI
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+            services.AddScoped<ErrorCatchingMiddleware>();
+
             return services;
+        }
+
+        public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<ErrorCatchingMiddleware>();
+
+            return app;
         }
     }
 
-      
+    
+
+
+
 }
