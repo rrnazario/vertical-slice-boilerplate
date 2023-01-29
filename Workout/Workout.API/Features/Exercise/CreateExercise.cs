@@ -42,9 +42,8 @@ namespace Workout.API.Features.Exercise
         public class Handler
             : RequestHandlerBase, IRequestHandler<CreateExerciseCommand, int>
         {
-            public Handler(WorkoutContext workoutContext) : base(workoutContext)
-            {
-            }
+            public Handler(IUnitOfWork unitOfWork)
+                : base(unitOfWork) { }
 
             public async Task<int> Handle(CreateExerciseCommand request, CancellationToken cancellationToken)
             {

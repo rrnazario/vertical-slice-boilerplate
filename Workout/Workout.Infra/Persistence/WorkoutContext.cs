@@ -10,10 +10,7 @@ namespace Workout.Infra.Persistence
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Serie> Series { get; set; }
 
-        public WorkoutContext(DbContextOptions<WorkoutContext> options) : base(options)
-        {
-
-        }
-
+        public WorkoutContext(DbContextOptions<WorkoutContext> options)
+            : base(options) { }
     }
 }
