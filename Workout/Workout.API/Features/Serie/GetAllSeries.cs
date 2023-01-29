@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Workout.API.SeedWork;
 using Workout.Domain.SeedWork;
-using Workout.Infra.Persistence;
 
 namespace Workout.API.Features.Serie
 {
@@ -11,15 +10,21 @@ namespace Workout.API.Features.Serie
         public record GetAllSeriesQuery 
             : IRequest<IEnumerable<GetAllSeriesQueryResponse>>;
 
-        public record GetAllSeriesQueryResponse(
-            QueryExerciseResponse Exercise,
-            float Weight,
-            int Repetitions
-            );
+        public record GetAllSeriesQueryResponse
+        {
+            public QueryExerciseResponse Exercise { get; }
+            public float Weight { get; }
+            public int Repetitions { get; }
 
-        public record QueryExerciseResponse(
-            string Name
-            );
+            public GetAllSeriesQueryResponse(string exerciseName, float weight, int repetitions)
+            {
+                Exercise = new(exerciseName);
+                Weight = weight;
+                Repetitions = repetitions;
+            }
+        }
+
+        public record QueryExerciseResponse(string Name);
 
         public class QueryHandler
             : RequestHandlerBase, IRequestHandler<GetAllSeriesQuery, IEnumerable<GetAllSeriesQueryResponse>>
@@ -33,7 +38,7 @@ namespace Workout.API.Features.Serie
                     .Series
                     .Include(_ => _.Exercise)
                     .Select(s => new GetAllSeriesQueryResponse(
-                        new QueryExerciseResponse(s.Exercise.Name),
+                        s.Exercise.Name,
                         s.Weight,
                         s.Repetitions))
                     .ToArrayAsync();
