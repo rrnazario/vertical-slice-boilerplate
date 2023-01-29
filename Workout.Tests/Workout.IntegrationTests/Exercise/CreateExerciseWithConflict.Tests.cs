@@ -31,7 +31,6 @@ namespace Workout.IntegrationTests.Exercise
 
             result.Should().BeGreaterThan(0);
 
-            command = new CreateExerciseCommand("Burpees", "Description");
             Action action = () => mediator.Send(command).GetAwaiter().GetResult();
 
             action.Should().Throw<ValidationException>()

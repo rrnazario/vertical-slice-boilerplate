@@ -24,7 +24,7 @@ namespace Workout.Domain.Model
         public void UpdateRepetitions(int newValue)
         {
             if (newValue != Repetitions)
-                Repetitions= newValue;
+                Repetitions = newValue;
         }
     }
 }
