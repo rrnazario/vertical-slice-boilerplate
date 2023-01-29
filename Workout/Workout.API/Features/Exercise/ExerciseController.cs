@@ -31,7 +31,7 @@ namespace Workout.API.Features.Exercise
         {
             var newId = await mediator.Send(command);
 
-            return Ok(new CreatedExerciseResponse(newId));
+            return Created("/", new CreatedExerciseResponse(newId));
         }
     }
 }
