@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Workout.Infra.Middlewares
 {
@@ -16,11 +17,19 @@ namespace Workout.Infra.Middlewares
             {
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(
-                    JsonConvert.SerializeObject(new
+
+                object content = Debugger.IsAttached
+                    ? new
                     {
-                        message = e.Message
-                    }));
+                        e.Message,
+                        e.StackTrace
+                    }
+                    : new
+                    {
+                        e.Message
+                    };
+
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(content));
             }
         }
     }
