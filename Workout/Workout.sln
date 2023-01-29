@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workout.Domain", "Workout.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workout.Infra", "Workout.Infra\Workout.Infra.csproj", "{C81D51ED-1023-4EB5-A3B9-BF8FE6C0110C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3065FA89-3E6A-4FF3-B8AA-489141A11C95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workout.IntegrationTests", "..\Workout.Tests\Workout.IntegrationTests\Workout.IntegrationTests.csproj", "{4C0243D9-FDE9-4BCA-8697-B4AB928B4E70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{C81D51ED-1023-4EB5-A3B9-BF8FE6C0110C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C81D51ED-1023-4EB5-A3B9-BF8FE6C0110C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C81D51ED-1023-4EB5-A3B9-BF8FE6C0110C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0243D9-FDE9-4BCA-8697-B4AB928B4E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0243D9-FDE9-4BCA-8697-B4AB928B4E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0243D9-FDE9-4BCA-8697-B4AB928B4E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0243D9-FDE9-4BCA-8697-B4AB928B4E70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4C0243D9-FDE9-4BCA-8697-B4AB928B4E70} = {3065FA89-3E6A-4FF3-B8AA-489141A11C95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88444802-73EB-4399-A96F-F75EBDC64D60}

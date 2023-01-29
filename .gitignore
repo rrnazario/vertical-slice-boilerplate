@@ -9,3 +9,5 @@
 /Workout/Workout.Domain/obj
 /Workout/Workout.Infra/bin
 /Workout/Workout.Infra/obj
+/Workout.Tests/Workout.IntegrationTests/bin
+/Workout.Tests/Workout.IntegrationTests/obj

@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Workout.API.SeedWork;
 using Workout.Domain.SeedWork;
-using Workout.Infra.Persistence;
 
 namespace Workout.API.Features.Exercise
 {
