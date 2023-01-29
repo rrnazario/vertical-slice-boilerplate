@@ -32,7 +32,7 @@ namespace Workout.API.Features.Serie
 
             private async Task<bool> ExistsAsync(int id, CancellationToken cancellationToken)
             {
-                var serie = await _unitOfWork.Series.FindAsync(id);
+                var serie = await _unitOfWork.Series.FindAsync(id, cancellationToken);
 
                 return serie is not null;
             }
@@ -47,12 +47,12 @@ namespace Workout.API.Features.Serie
 
             public async Task<Unit> Handle(UpdateRepetitionsCommand request, CancellationToken cancellationToken)
             {
-                var serie = await _unitOfWork.Series.FindAsync(request.Id);
+                var serie = await _unitOfWork.Series.FindAsync(request.Id, cancellationToken);
 
                 serie!.UpdateRepetitions(request.Amount);
                 _unitOfWork.Update(serie);
 
-                await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }

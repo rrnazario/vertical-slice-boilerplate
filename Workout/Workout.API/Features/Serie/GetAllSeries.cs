@@ -41,7 +41,7 @@ namespace Workout.API.Features.Serie
                         s.Exercise.Name,
                         s.Weight,
                         s.Repetitions))
-                    .ToArrayAsync();
+                    .ToArrayAsync(cancellationToken);
                 
                 return result.AsEnumerable();
             }
