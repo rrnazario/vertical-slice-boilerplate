@@ -6,8 +6,8 @@ namespace Workout.Domain.SeedWork
 {
     public interface IUnitOfWork
     {
-        public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<Serie> Series { get; set; }
+        public DbSet<Exercise> Exercises { get; }
+        public DbSet<Serie> Series { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class;
