@@ -1,6 +1,5 @@
 ﻿using Light.GuardClauses;
 using Workout.Domain.SeedWork;
-using Workout.Infra.Persistence;
 
 namespace Workout.API.SeedWork
 {
